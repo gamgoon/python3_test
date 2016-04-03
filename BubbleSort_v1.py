@@ -16,16 +16,10 @@ print("unsorted list is : ", unsortedList)
 
 # Sorting
 maxCount = len(unsortedList) - 1
-# print(maxCount)
-while maxCount > 0:
-    # print("xxx")
-    for i in range(0, maxCount):
-        # print(unsortedList[i])
-        if unsortedList[i] > unsortedList[i+1]:
-            # print("change ", unsortedList[i], ' and ', unsortedList[i+1])
-            tmp = unsortedList[i]
-            unsortedList[i] = unsortedList[i+1]
-            unsortedList[i+1] = tmp
-    maxCount -= 1
+
+for i in range(maxCount):
+    for j in range(maxCount - i):
+        if unsortedList[j] > unsortedList[j+1]:
+            unsortedList[j], unsortedList[j+1] = unsortedList[j+1], unsortedList[j]
 
 print("sorted list is : ", unsortedList)
