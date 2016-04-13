@@ -4,14 +4,56 @@ strike_count = 0
 ball_count = 0
 game_count = 0
 
-while 1:
 
+def init_target_num():
     # 랜덤 중복 없는 숫자 3자리
     number_pool = list(range(0, 10))
     # print(number_pool)
     random.shuffle(number_pool)
     # print(number_pool)
-    target_num = str(number_pool.pop()) + str(number_pool.pop()) + str(number_pool.pop())
+    return str(number_pool.pop()) + str(number_pool.pop()) + str(number_pool.pop())
+
+
+def one_more():
+    while 1:
+        yes_no = input("한판 더? (yes/no) :")
+        if yes_no.upper() != 'YES' and yes_no.upper() != 'NO':
+            continue
+        else:
+            break
+
+    if yes_no.upper() == 'NO':
+        return 0
+    else:
+        return 1
+
+
+def validate_input(input_num):
+    try:
+        num_input = int(input_num)
+    except ValueError:
+        print("숫자만 입력하삼")
+        return 0
+
+    str_input = str(input_num)
+
+    if len(list(str_input)) != 3:
+        print("3자리 숫자 입력하삼")
+        return 0
+
+    # print(str_input_num)
+    tmp = set(str_input)
+
+    if len(tmp) != 3:
+        print("중복된 숫자는 입력하지마삼")
+        return 0
+
+    return 1
+
+
+while 1:
+
+    target_num = init_target_num()
     print(target_num)
 
     while strike_count < 3:
@@ -21,24 +63,10 @@ while 1:
 
         origin_number = input("input number: ")
 
-        try:
-            input_number = int(origin_number)
-        except ValueError:
-            print("숫자만 입력하삼")
+        if not (validate_input(origin_number)):
             continue
 
-        str_input_num = str(origin_number)
-
-        if len(list(str_input_num)) != 3:
-            print("3자리 숫자 입력하삼")
-            continue
-
-        # print(str_input_num)
-        tmp = set(str_input_num)
-
-        if len(tmp) != 3:
-            print("중복된 숫자는 입력하지마삼")
-            continue
+        str_input_num = str_input = str(origin_number)
 
         index = 0
         for i in str_input_num:
@@ -65,14 +93,8 @@ while 1:
         ball_count = 0
         game_count = 0
 
-    while 1:
-        yes_no = input("한판 더? (yes/no) :")
-        if yes_no.upper != 'YES' and yes_no.upper != 'NO':
-            continue
-        else:
-            break
-
-    if yes_no.upper() == 'NO':
+    if one_more():
+        continue
+    else:
         break
-
 
